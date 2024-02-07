@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BAL",
+    "\\BAL\\Services",
+    "\\BAL\\Services\\MessageService",
+    "\\ChatApplicationAPI",
+    "\\ChatApplicationAPI\\Controllers",
+    "\\ChatApplicationAPI\\Hub",
+    "\\DAL",
+    "\\DAL\\ModelDTO"
+  ],
+  "SelectedNode": "\\DAL\\ModelDTO\\MessageDTO.cs",
+  "PreviewInSolutionExplorer": false
+}

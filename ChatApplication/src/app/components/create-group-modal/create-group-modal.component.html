@@ -1,0 +1,50 @@
+<div class="modal-header justify-content-center">
+  <h5 class="modal-title">Create Group</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="groupForm">
+    <div class="form-group">
+      <label for="GroupName" class="form-label">Group Name</label>
+      <input
+        [ngStyle]="{
+          'border':
+            f['groupName'].invalid &&
+            (f['groupName'].dirty || f['groupName'].touched) ? '1px solid red' :''
+        }"
+        type="text"
+        formControlName="groupName"
+        placeholder="Group Name"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          f['groupName'].invalid &&
+          (f['groupName'].dirty || f['groupName'].touched)
+        "
+      >
+        <div class="text-danger" *ngIf="f['groupName'].errors?.['required']">
+          *Group Name is required.
+        </div>
+        <div class="text-danger" *ngIf="f['groupName'].errors?.['minlength']">
+          *Group Name must be contains atleast 3 characters.
+        </div>
+        <div class="text-danger" *ngIf="f['groupName'].errors?.['maxlength']">
+          *Group Name should not be greater than 15 characters.
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    data-bs-dismiss="modal"
+    (click)="onClose()"
+  >
+    Close
+  </button>
+  <button type="button" class="btn btn-primary" (click)="createGroup()">
+    Add
+  </button>
+</div>

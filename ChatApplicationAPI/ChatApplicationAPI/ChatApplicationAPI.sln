@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApplicationAPI", "ChatApplicationAPI\ChatApplicationAPI.csproj", "{D4CAC7E2-BF28-4D8A-A98C-704053FEFB21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{ED777517-1155-4FDF-92F3-6097E0A02967}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BAL", "BAL\BAL.csproj", "{EFA158F5-4EC4-475C-837F-6C268D29B2CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4CAC7E2-BF28-4D8A-A98C-704053FEFB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4CAC7E2-BF28-4D8A-A98C-704053FEFB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4CAC7E2-BF28-4D8A-A98C-704053FEFB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4CAC7E2-BF28-4D8A-A98C-704053FEFB21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED777517-1155-4FDF-92F3-6097E0A02967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED777517-1155-4FDF-92F3-6097E0A02967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED777517-1155-4FDF-92F3-6097E0A02967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED777517-1155-4FDF-92F3-6097E0A02967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA158F5-4EC4-475C-837F-6C268D29B2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA158F5-4EC4-475C-837F-6C268D29B2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA158F5-4EC4-475C-837F-6C268D29B2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA158F5-4EC4-475C-837F-6C268D29B2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B21E03F1-0805-4E03-9E0D-62F3C40CB0B7}
+	EndGlobalSection
+EndGlobal

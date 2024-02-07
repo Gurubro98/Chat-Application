@@ -1,0 +1,59 @@
+::ng-deep p-password input {
+    width: 100%;
+  }
+  
+  ::ng-deep input {
+    width: 100%;
+  }
+  
+  ::ng-deep p-password div {
+    width: 100%;
+  }
+  
+  ::ng-deep p-button button {
+    width: 100%;
+  }
+  
+  .signup-form {
+    display: flex;
+      justify-content: center;
+    
+    width: 50%;
+    padding: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  h4 {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  
+  
+  ::ng-deep p-button button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+    background-color: #478486;
+     color: white;
+     border: none;
+  }
+  
+  input:hover,
+  ::ng-deep p-password input:hover
+   {
+    border-color: cadetblue;
+  }
+  
+  input:focus,
+  ::ng-deep p-password input:focus,
+  ::ng-deep p-button button:focus{
+    border-color: cadetblue;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #478486;
+  }
+  
+  @media screen and (max-width:799px) {
+    .signup-form{
+      width: 100%;
+    }
+  }

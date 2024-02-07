@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Gagan\\Programming\\assignment\\ChatApplicationAPI\\ChatApplicationAPI\\ChatApplicationAPI\\wwwroot\\Resources\\WhatsApp Image 2022-07-06 at 11.52.59 AM.jpeg",
+      "PackagePath": "staticwebassets\\Resources\\WhatsApp Image 2022-07-06 at 11.52.59 AM.jpeg"
+    },
+    {
+      "Id": "C:\\Gagan\\Programming\\assignment\\ChatApplicationAPI\\ChatApplicationAPI\\ChatApplicationAPI\\wwwroot\\Resources\\images\\KUK.jpg",
+      "PackagePath": "staticwebassets\\Resources\\images\\KUK.jpg"
+    },
+    {
+      "Id": "C:\\Gagan\\Programming\\assignment\\ChatApplicationAPI\\ChatApplicationAPI\\ChatApplicationAPI\\wwwroot\\Resources\\images\\WhatsApp Image 2022-06-15 at 12.27.03 PM.jpeg",
+      "PackagePath": "staticwebassets\\Resources\\images\\WhatsApp Image 2022-06-15 at 12.27.03 PM.jpeg"
+    },
+    {
+      "Id": "C:\\Gagan\\Programming\\assignment\\ChatApplicationAPI\\ChatApplicationAPI\\ChatApplicationAPI\\wwwroot\\Resources\\images\\WhatsApp Image 2022-07-06 at 11.52.59 AM.jpeg",
+      "PackagePath": "staticwebassets\\Resources\\images\\WhatsApp Image 2022-07-06 at 11.52.59 AM.jpeg"
+    },
+    {
+      "Id": "C:\\Gagan\\Programming\\assignment\\ChatApplicationAPI\\ChatApplicationAPI\\ChatApplicationAPI\\wwwroot\\Resources\\images\\kuk2.jpg",
+      "PackagePath": "staticwebassets\\Resources\\images\\kuk2.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.ChatApplicationAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.ChatApplicationAPI.props",
+      "PackagePath": "build\\ChatApplicationAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.ChatApplicationAPI.props",
+      "PackagePath": "buildMultiTargeting\\ChatApplicationAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.ChatApplicationAPI.props",
+      "PackagePath": "buildTransitive\\ChatApplicationAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

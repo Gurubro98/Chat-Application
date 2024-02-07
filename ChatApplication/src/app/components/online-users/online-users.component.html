@@ -1,0 +1,509 @@
+<!-- <div class="container-fluid">
+  {{ loggedInUserName }}
+  Left Side
+  <div class="row">
+    <div class="col-md-4 side" [class.hide-side]="!isChatHeadVisible">
+      <div class="d-flex justify-content-end add-icon">
+        <h3 class="me-auto">Chats</h3>
+        <a class="btn btn-primary" (click)="showUsers(false)">All Users</a>
+        <div class="notification">
+          <i class="bx bx-bell" (click)="showNotification()"></i>
+          <span class="badge bg-secondary">{{ requestCount }}</span>
+        </div>
+
+        <i
+          title="Add Group"
+          class="bx bxs-plus-circle ms-3"
+          (click)="openModal()"
+        ></i>
+        <i class="bx bx-log-out ms-3" title="logout" (click)="onLogout()"></i>
+      </div>
+      <hr class="text-white" />
+
+      <div class="card-body contacts_body">
+        <ul class="contacts">
+          <li
+            style="cursor: pointer"
+            [class.active]="item.isActive"
+            *ngFor="let item of users"
+            (click)="openChat(item)"
+          >
+            <div class="d-flex position-relative bd-highlight">
+              <div class="img_cont">
+                <img
+                  [src]="
+                    item.groupName
+                      ? 'https://cdn.pixabay.com/photo/2016/11/14/17/39/group-1824145_640.png'
+                      : 'https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg'
+                  "
+                  class="rounded-circle user_img"
+                />
+                <span
+                  *ngIf="
+                    (item.user?.name || item.mutual?.name) && !item.groupName
+                  "
+                  class="online_icon"
+                  [class.offline]="!item.isOnline"
+                ></span>
+              </div>
+              <div class="user_info">
+                <span *ngIf="item.userId == loggedInUserId">{{
+                  item.mutual?.name
+                }}</span>
+                <span *ngIf="item.mutualId == loggedInUserId">{{
+                  item.user?.name
+                }}</span>
+                <span>{{ item.groupName }}</span>
+              </div>
+
+              <div
+                class="remove"
+                *ngIf="
+                  (item.user?.name || item.mutual?.name) && !item.groupName
+                "
+              >
+                <a
+                  class="btn btn-danger rounded-3"
+                  *ngIf="item.userId == loggedInUserId"
+                  (click)="removeUserFromList(item.mutualId)"
+                  ><i class="bx bx-trash"></i
+                ></a>
+                <a
+                  class="btn btn-danger rounded-3"
+                  *ngIf="item.mutualId == loggedInUserId"
+                  (click)="removeUserFromList(item.userId)"
+                  ><i class="bx bx-trash"></i
+                ></a>
+              </div>
+
+              <div class="count">
+                <span
+                  class="badge badge-pill badge-success"
+                  *ngIf="item.count > 0"
+                  >{{ item.count }}</span
+                >
+              </div>
+            </div>
+            <hr style="margin-top: 5px; margin-bottom: 2px" />
+          </li>
+        </ul>
+      </div>
+    </div>
+    Right Side
+    <div
+      id="chat-container"
+      class="col-md-7 chatside"
+      [ngClass]="{ 'd-none': isChatHeadVisible && isSmallScreen }"
+    >
+      <div class="main">
+        <div
+          class="d-flex justify-content-start align-items-center add-icon heading"
+          *ngIf="isChatOpen"
+        >
+          <i
+            class="bx bx-arrow-back float-left cursor-pointer me-2"
+            (click)="onBack()"
+            *ngIf="isSmallScreen"
+          ></i>
+
+          <img
+            [src]="
+              chatUser.groupName
+                ? 'https://cdn.pixabay.com/photo/2016/11/14/17/39/group-1824145_640.png'
+                : 'https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg'
+            "
+            class="rounded-circle user_img me-2"
+          />
+          <h5>{{ chatUser.name }}</h5>
+          <h5 style="cursor: pointer" (click)="showUsers(true)">
+            {{ chatUser.groupName }}
+          </h5>
+          <a
+            class="btn btn-danger ms-auto"
+            *ngIf="chatUser.groupName && isAVailableForChat"
+            (click)="onLeaveGroup(chatUser.groupId)"
+            >Leave Group</a
+          >
+        </div>
+        <hr class="text-white" *ngIf="isChatOpen" />
+
+        <div class="card-body msg_card_body mt-5">
+          <div class="welcome" *ngIf="!isChatOpen">
+            <img />
+            <h2>Welcome</h2>
+            <p></p>
+          </div>
+          <div *ngIf="isChatOpen">
+            <div *ngFor="let m of displayMessages">
+              <div class="messageItem">
+                <div
+                  class="d-flex justify-content-start mb-4"
+                  *ngIf="m.type === 'recieved'"
+                >
+                  <div class="img_cont_msg">
+                    <img
+                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                      class="rounded-circle user_img_msg"
+                    />
+                  </div>
+                  <div class="msg_cotainer">
+                    {{ m.content }}
+                    <br />
+                    <span class="msg_time"
+                      >{{ convertUtcToLocalTime(m.timeStamp) }} |
+                      {{ m.sender?.name }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="messageItem">
+                <div
+                  class="d-flex justify-content-end mb-4"
+                  *ngIf="m.type === 'sent'"
+                >
+                  <div class="msg_cotainer_send">
+                    {{ m.content }}
+                    <br />
+                    <span class="msg_time_send"
+                      >{{ convertUtcToLocalTime(m.timeStamp) }} |
+                      {{ loggedInUserName }}</span
+                    >
+                  </div>
+                  <div class="img_cont_msg">
+                    <img
+                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                      class="rounded-circle user_img_msg"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer" *ngIf="isChatOpen">
+        <div
+          class="footer-container position-relative fixed-bottom"
+          *ngIf="isAVailableForChat"
+        >
+          <i
+            class="bx bx-smile emoji-icon"
+            [ngStyle]="{ top: !showEmoji ? '96%' : '62%' }"
+            (click)="onShowEmoji()"
+          ></i>
+          <i
+            class="bx bxs-send send-icon"
+            [ngStyle]="{ top: !showEmoji ? '96%' : '62%' }"
+            (click)="SendDirectMessage()"
+          ></i>
+          
+          <input
+            type="text"
+            name="message"
+            [(ngModel)]="message"
+            placeholder="Send Message"
+            required
+          />
+        </div>
+        <div
+          class="text-center join-msg"
+          *ngIf="!isAVailableForChat"
+          style="cursor: pointer"
+          (click)="onJoinGroup()"
+        >
+          <p>Join Group</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="container-fluid">
+  <div class="container">
+    <!-- left side -->
+    <div class="left" [class.hide-side]="!isChatHeadVisible">
+      <div class="chat-head-heading">
+        <div class="nav">
+          <!-- Get all User -->
+          <a class="btn show-user" style="cursor: pointer" (click)="showUsers()"
+            >All Users</a
+          >
+
+          <div class="request ms-auto">
+            <i class="bx bx-bell" (click)="showNotification()"></i>
+            <span class="badge request-cnt">{{ requestCount }}</span>
+          </div>
+          <!-- Profile -->
+          <div class="profile ms-3">
+            <div class="profile-menu">
+              <p-avatar
+                (click)="onShowProfile()"
+                class="ms-auto position-relative"
+                [image]="
+                  loggedInUser && loggedInUser.imageUrl
+                    ? loggedInUser.imageUrl
+                    : 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png'
+                "
+                styleClass="mr-2 cursor-pointer"
+                shape="circle"
+              ></p-avatar>
+              <p-menu [model]="profile" [hidden]="showProfile"></p-menu>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <ul>
+        <li
+          style="cursor: pointer; display: flex"
+          [class.active]="isMutual(item) && item.isActive"
+          *ngFor="let item of users"
+          (click)="openChat(item)"
+        >
+          <div class="img_cont">
+            <img
+              [src]="
+                isGroup(item) && item.groupId
+                  ? 'https://cdn.pixabay.com/photo/2016/11/14/17/39/group-1824145_640.png'
+                  : isMutual(item) && getChatUserImage(item)
+                  ? getChatUserImage(item)
+                  : 'https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg'
+              "
+              class="rounded-circle user_img"
+            />
+            <span
+              *ngIf="
+                isMutual(item) &&
+                item.user?.name &&
+                !(isGroup(item) && item.groupName)
+              "
+              class="online_icon"
+              [class.offline]="!item.isOnline"
+            ></span>
+          </div>
+          <div class="user_info">
+            <span *ngIf="isMutual(item) && item.userId == loggedInUserId">{{
+              item.mutual?.name
+            }}</span>
+            <span *ngIf="isMutual(item) && item.mutualId == loggedInUserId">{{
+              item.user?.name
+            }}</span>
+            <span *ngIf="isGroup(item)">{{ item.groupName }}</span>
+          </div>
+
+          <div class="count ms-auto">
+            <span
+              class="badge badge-pill badge-success"
+              *ngIf="isMutual(item) && item.count > 0"
+              >{{ item.count }}</span
+            >
+          </div>
+
+          <div
+            class="remove ms-3"
+            *ngIf="
+              isMutual(item) &&
+              (item.user?.name || item.mutual?.name) &&
+              !(isGroup(item) && item.groupId)
+            "
+          >
+            <a
+              class="btn rounded-3"
+              *ngIf="
+                isMutual(item) && item.userId == loggedInUserId && item.mutualId
+              "
+              (click)="removeUserFromList(item.mutualId)"
+              ><i class="bx bx-trash"></i
+            ></a>
+            <a
+              class="btn rounded-3"
+              *ngIf="
+                isMutual(item) && item.mutualId == loggedInUserId && item.userId
+              "
+              (click)="removeUserFromList(item.userId)"
+              ><i class="bx bx-trash"></i
+            ></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- show group Users -->
+
+    <div class="right" *ngIf="showGroupUser">
+      <app-user-detail
+        [users]="groupUsers"
+        [currentGroup]="currentGroup"
+        [loggedInUserId]="loggedInUserId"
+        (event)="onBackGroupDetail($event)"
+      ></app-user-detail>
+    </div>
+
+    <!-- right side -->
+    <div
+      class="right"
+      *ngIf="!showGroupUser"
+      [ngClass]="{ 'd-none': isChatHeadVisible && isSmallScreen }"
+    >
+      <div class="welcome" *ngIf="!isChatOpen">
+        <i class="bx bxs-chat"></i>
+        <img />
+        <h2>Welcome</h2>
+        <p></p>
+      </div>
+      <div class="heading" *ngIf="isChatOpen">
+        <a class="btn">
+          <i
+            class="bx bx-arrow-back cursor-pointer me-2"
+            (click)="onBack()"
+            *ngIf="isSmallScreen"
+          ></i
+        ></a>
+        <img
+          [src]="
+            currentGroup && currentGroup.groupId
+              ? 'https://cdn.pixabay.com/photo/2016/11/14/17/39/group-1824145_640.png'
+              : 'https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg'
+          "
+          class="rounded-circle user_img"
+        />
+        <h5
+          class="ms-2"
+          *ngIf="isMutual(chatUser) && chatUser.mutualId === loggedInUserId"
+        >
+          {{ chatUser.user?.name }}
+        </h5>
+        <h5
+          class="ms-2"
+          *ngIf="isMutual(chatUser) && chatUser.mutualId !== loggedInUserId"
+        >
+          {{ chatUser.mutual?.name }}
+        </h5>
+        <h5 class="ms-2" style="cursor: pointer" (click)="onShowGroupUser()">
+          {{ isGroup(chatUser) && chatUser.groupName }}
+        </h5>
+        <div
+          class="chat-menu ms-auto"
+          *ngIf="isGroup(chatUser) && chatUser.groupName"
+        >
+          <a class="btn" (click)="onShowMenu()"
+            ><i class="bx bx-dots-vertical-rounded"></i
+          ></a>
+          <p-menu *ngIf="showMenu" [model]="items"></p-menu>
+        </div>
+      </div>
+      <div
+        class="chat"
+        *ngIf="isChatOpen"
+        #scrollContainer
+        (scroll)="onScroll($event)"
+      >
+        <div *ngFor="let m of displayMessages.slice().reverse()">
+          <div class="" *ngIf="m.type === 'recieved'">
+            <div class="received">
+              <div class="send-image">
+                <img
+                  class="user_img rounded-circle"
+                  src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                  alt="user_Image"
+                />
+                <span class="msg_time"
+                  >{{ convertUtcToLocalTime(m.timeStamp) }} |
+                  {{ m.sender?.name }}</span
+                >
+              </div>
+              <span *ngIf="m.content" class="user_msg">{{ m.content }}</span>
+              <span *ngIf="!m.content" class="user_msg">
+                <img
+                  [src]="getSendImage(m.attachment.fileName)"
+                  alt="send-image"
+                />
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="m.type === 'sent'">
+            <div class="sent">
+              <span *ngIf="m.content" class="user_msg">{{ m.content }}</span>
+              <span *ngIf="!m.content" class="user_msg">
+                <img
+                  [src]="getSendImage(m.attachment.fileName)"
+                  alt="send-image"
+                />
+              </span>
+              <div class="send-image">
+                <span class="msg_time my-auto mr-2"
+                  >{{ convertUtcToLocalTime(m.timeStamp) }} |
+                  {{ loggedInUserName }}</span
+                >
+                <img
+                  class="user_img rounded-circle"
+                  src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                  alt="user_Image"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="spinner" class="spinner-border text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div class="footer" *ngIf="isChatOpen">
+        <div class="attachment">
+          <i
+            (click)="onShowAttachMent()"
+            class="bx bx-paperclip attachment-icon"
+            *ngIf="isAVailableForChat"
+            style="transform: rotate(270deg)"
+          ></i>
+          <p-menu [model]="attachment" [hidden]="!showAttachMent"></p-menu>
+          <div class="preview-Image" *ngIf="previewImage">
+            <img [src]="previewImage" alt="Preview Image" />
+          </div>
+
+          <input
+            #choose
+            type="file"
+            class="d-none"
+            accept="image/*"
+            (change)="handleFileSelected($event)"
+          />
+        </div>
+        <i
+          *ngIf="isAVailableForChat"
+          class="bx bx-smile emoji-icon ms-2"
+          [ngStyle]="{ top: !showEmoji ? '94%' : '54%' }"
+          (click)="onShowEmoji()"
+        ></i>
+        <i
+          *ngIf="isAVailableForChat"
+          class="bx bxs-send send-icon"
+          [ngStyle]="{ top: !showEmoji ? '92%' : '35%' }"
+          (click)="SendDirectMessage()"
+        ></i>
+        <emoji-mart
+          *ngIf="!showEmoji"
+          (emojiSelect)="addEmoji($event)"
+        ></emoji-mart>
+        <input
+          *ngIf="isAVailableForChat"
+          type="text"
+          name="message"
+          [(ngModel)]="message"
+          placeholder="Send Message"
+          required=""
+        />
+
+        <div
+          class="text-center join-msg"
+          *ngIf="!isAVailableForChat"
+          style="cursor: pointer"
+          (click)="onJoinGroup()"
+        >
+          <p>Join Group</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

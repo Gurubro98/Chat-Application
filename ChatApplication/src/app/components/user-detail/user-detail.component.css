@@ -1,0 +1,67 @@
+.groupDetail {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.groupDetail img {
+  width: 180px;
+  height: 180px;
+}
+
+.groupDetail h6 {
+  margin-left: 5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.groupDetail hr {
+  width: 90%;
+  margin: auto 0px;
+}
+
+.groupUserList {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 45vh;
+  overflow-y: auto;
+}
+
+.groupUserList .user_img {
+  width: 40px;
+  height: 40px;
+}
+
+.delete {
+  position: absolute;
+  right: 100px;
+}
+
+.delete .bx-trash {
+  color: #fff;
+}
+
+.contacts {
+  list-style: none;
+  padding: 0;
+}
+
+.contacts li {
+  width: 100% !important;
+  padding: 5px 10px;
+  margin-bottom: 15px !important;
+}
+
+.contacts li:hover {
+  background-clip: #eee;
+}
+
+.user_info {
+  padding-left: 15px;
+}
+
+.back {
+  color: #ef233c;
+  font-size: 18px;
+  padding-left: 20px;
+}

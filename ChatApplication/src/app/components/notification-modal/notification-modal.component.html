@@ -1,0 +1,37 @@
+<div class="modal-header justify-content-center">
+    <h5 class="modal-title">Members</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      (click)="onClose()"
+    ></button>
+  </div>
+  <div class="modal-body contacts_body">
+    <ul class="contacts">
+      <li *ngFor="let item of requests">
+        <div class="d-flex position-relative bd-highlight">
+          
+          <div class="user_info">
+            <span *ngIf="item.receiverId == loggedInUserId">{{ item.sender?.name}} </span>
+            <span *ngIf="item.senderId == loggedInUserId">{{ item.receiver?.name}} </span>
+            <div *ngIf="(item.receiverId == loggedInUserId) && !item.isTakeAction">
+              <a class="btn btn-danger mr-2" (click)="onReject(item)"><i class='bx bx-x'></i></a>
+              <a class="btn btn-success"><i class='bx bx-check' (click)="onApproved(item)"></i></a>
+            </div>
+            <div *ngIf="item.senderId == loggedInUserId">
+              <a class="btn" [ngClass]="getActionColor(item.status)">{{getActionValue(item.status)}}</a>
+
+            </div>
+            <div *ngIf="item.receiverId == loggedInUserId">
+              <a class="btn" [ngClass]="getActionColor(item.status)">{{getActionValue(item.status)}}</a>
+
+            </div>
+          </div>
+        </div>
+        <hr style="margin-top: 5px; margin-bottom: 2px" />
+      </li>
+    </ul>
+  </div>
+  

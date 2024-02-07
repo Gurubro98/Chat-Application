@@ -1,0 +1,47 @@
+<div class="modal-header justify-content-center">
+  <h5 class="modal-title">Users</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="onClose()"
+  ></button>
+</div>
+<div class="modal-body contacts_body">
+  <ul class="contacts">
+    <li *ngFor="let item of users">
+      <div class="d-flex position-relative bd-highlight">
+        <div class="img_cont">
+          <img
+            src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+            class="rounded-circle user_img"
+          />
+          <span
+            class="online_icon"
+            [class.offline]="!item.isOnline"
+          ></span>
+        </div>
+        <div class="user_info">
+          <span>{{ item?.name }}</span>
+        </div>
+        <div class="delete">
+          <a
+            *ngIf="!item.isSendRequest"
+            class="btn btn-success rounded-3"
+            (click)="sendRequest(item)"
+          >
+            <i class="bx bxs-plus-circle"></i
+          ></a>
+          <a
+            *ngIf="item.isSendRequest"
+            class="btn btn-warning rounded-3"
+          >
+            Send Request</a
+          >
+        </div>
+      </div>
+      <hr style="margin-top: 5px; margin-bottom: 2px" />
+    </li>
+  </ul>
+</div>

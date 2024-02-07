@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="content-center">
+    <div class="row signup-form">
+      <div class="col-md-10 mt-4">
+        <h4 class="mt-4 text-center">Register Page</h4>
+        <form [formGroup]="signupForm">
+          <div class="field-space">
+            <label for="name">Name</label><br />
+            <input type="text" pInputText formControlName="name" />
+
+            <div
+              *ngIf="
+                f['name'].invalid && (f['name'].dirty || f['name'].touched)
+              "
+            >
+              <div class="text-danger" *ngIf="f['name'].errors?.['required']">
+                *Name is required.
+              </div>
+              <div class="text-danger" *ngIf="f['name'].errors?.['minlength']">
+                *Name must be contains atleast 3 characters.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['name'].errors?.['pattern'] && !f['name'].errors?.['minlength']"
+              >
+                *Name should be contains letters only.
+              </div>
+              <div class="text-danger" *ngIf="f['name'].errors?.['maxlength']">
+                *Name should not be greater than 20 characters.
+              </div>
+            </div>
+          </div>
+          <div class="field-space">
+            <label for="Email">Email address</label><br />
+            <input type="Email" pInputText formControlName="email" />
+
+            <div
+              *ngIf="
+                f['email'].invalid && (f['email'].dirty || f['email'].touched)
+              "
+            >
+              <div class="text-danger" *ngIf="f['email'].errors?.['required']">
+                *Email is required.
+              </div>
+              <div class="text-danger" *ngIf="f['email'].errors?.['pattern']">
+                *Please enter your valid Email.
+              </div>
+            </div>
+          </div>
+
+          <div class="field-space">
+            <label for="Password">Password</label><br />
+            <p-password
+              formControlName="password"
+              [toggleMask]="true"
+            ></p-password>
+
+            <div
+              *ngIf="
+                f['password'].invalid &&
+                (f['password'].dirty || f['password'].touched)
+              "
+            >
+              <div
+                class="text-danger"
+                *ngIf="f['password'].errors?.['required']"
+              >
+                *Password is required.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['password'].errors?.['minlength']"
+              >
+                *Password must be contains atleast 7 characters.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['password'].errors?.['pattern'] && !f['password'].errors?.['minlength']"
+              >
+                *Password should be contain one uppercase, one lowercase, digit
+                and special Symbol.
+              </div>
+            </div>
+          </div>
+          <div class="field-space">
+            <label for="ConfirmPassword">Confirm Password</label><br />
+            <p-password
+              formControlName="confirmPassword"
+              [toggleMask]="true"
+            ></p-password>
+
+            <div
+              *ngIf="
+                f['confirmPassword'].invalid &&
+                (f['confirmPassword'].dirty || f['confirmPassword'].touched)
+              "
+            >
+              <div
+                class="text-danger"
+                *ngIf="f['confirmPassword'].errors?.['required']"
+              >
+                *Confirm Password is required.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['confirmPassword'].errors?.['ConfirmedValidator']"
+              >
+                *Confirm Password and Password not match.
+              </div>
+            </div>
+          </div>
+          <div class="field-space">
+            <!-- Image preview -->
+            <div
+              class="mb-3 position-relative"
+              *ngIf="imageUrl && imageUrl != 'undefined'"
+            >
+              <img
+                width="100px"
+                height="100px"
+                [src]="imageUrl"
+                class="image"
+              />
+              <i
+                class="bx bx-x position-absolute top-0 cursor-pointer"
+                (click)="onCloseImage()"
+              ></i>
+            </div>
+
+            <!-- Image File -->
+            <div>
+              <label for="imgFile" class="block text-900 font-medium mb-2"
+                >Upload Image</label
+              >
+              <p-fileUpload
+                mode="basic"
+                formControlName="profilePicture"
+                chooseLabel="Choose"
+                name="demo[]"
+                accept="image/*"
+                [auto]="true"
+                [customUpload]="true"
+                (uploadHandler)="onUpload($event)"
+              ></p-fileUpload>
+            </div>
+          </div>
+          <div class="text-center">
+            <p-button label="Signup" (click)="onSignUp()"></p-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

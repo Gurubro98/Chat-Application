@@ -1,0 +1,42 @@
+<!-- demo -->
+<a class="btn back" (click)="onBack()"><i class="bx bx-arrow-back"></i></a>
+<div class="groupDetail mt-5">
+  <img
+    src="https://cdn.pixabay.com/photo/2016/11/14/17/39/group-1824145_640.png"
+    alt="Group Image"
+  />
+  <h6>{{ currentGroup?.groupName }}</h6>
+  <hr />
+  <h4 class="text-center mt-5">Group Members</h4>
+  <div class="groupUserList">
+    <ul class="contacts">
+      <li *ngFor="let item of users">
+        <div class="d-flex position-relative bd-highlight">
+          <div>
+            <img
+              src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+              class="rounded-circle user_img"
+            />
+          </div>
+          <div class="user_info">
+            <span>{{ item?.user?.name }}</span>
+          </div>
+          <div class="delete">
+            <a
+              class="btn btn-danger rounded-3"
+              *ngIf="
+                item.userId &&
+                currentGroup?.userId == loggedInUserId &&
+                currentGroup?.userId != item.userId
+              "
+              (click)="onRemoveGroup(item.userId)"
+            >
+              <i class="bx bx-trash"></i
+            ></a>
+          </div>
+        </div>
+        <hr style="margin-top: 5px; margin-bottom: 2px" />
+      </li>
+    </ul>
+  </div>
+</div>
